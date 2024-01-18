@@ -56,4 +56,14 @@ export class BrandService {
     return findBrand;
   }
   /* Elimina un atributo de brand */
+  deleteOneByIdBrand(idBrand: string) {
+    const findBrand: Brand = this.brands.find(
+      (brand: Brand) => brand.id === idBrand,
+    );
+    if (!findBrand) return { message: `El id: ${idBrand} es incorrecto` };
+    findBrand.updatedAt = now;
+    findBrand.isDeleted = true;
+    findBrand.deletedAt = now;
+    return { message: `El id: ${idBrand} ha sido eliminado` };
+  }
 }

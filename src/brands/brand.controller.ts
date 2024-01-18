@@ -1,4 +1,12 @@
-import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+} from '@nestjs/common';
 import { BrandService } from './brand.service';
 import { CreateBrandDto, UpdateBrandDto } from '../../libs/dtos';
 import { Brand } from '../../libs/entitys';
@@ -27,4 +35,8 @@ export class BrandController {
     return this.brandService.patchOneByIdBrand(id, payload);
   }
   /*Metodo Http Delete por Id */
+  @Delete(':id')
+  deleteBrand(@Param('id') id: string) {
+    return this.brandService.deleteOneByIdBrand(id);
+  }
 }
