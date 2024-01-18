@@ -4,6 +4,7 @@ import { Brand } from '../../libs/entitys';
 import { CreateBrandDto } from '../../libs/dtos/brands/create-brand.dto';
 
 const now: Date = new Date();
+/* Servicio de lógica de negocios */
 @Injectable()
 export class BrandService {
   private brands: Brand[] = [
@@ -17,7 +18,11 @@ export class BrandService {
       deletedAt: undefined,
     },
   ];
-
+  /* Obtener todos los Brands */
+  getAllBrands() {
+    return this.brands;
+  }
+  /* Crear solo un Brand */
   createBrand(createBrand: CreateBrandDto): Brand {
     const { name } = createBrand;
     const newBrand: Brand = {
@@ -32,7 +37,7 @@ export class BrandService {
     this.brands.push(newBrand);
     return newBrand;
   }
-
+  /*Obtener un Brand por Id*/
   getOneByIdBrand(idBrand: string) {
     const findBrand: Brand = this.brands.find(
       (brand: Brand) => brand.id === idBrand,
@@ -40,4 +45,6 @@ export class BrandService {
     if (!findBrand) return { message: `El id: ${idBrand} es incorrecto` };
     return findBrand;
   }
+  /* Actualiza un atributo de brand */
+  /* Elimina un atributo de brand */
 }
