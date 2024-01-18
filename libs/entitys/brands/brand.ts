@@ -1,3 +1,4 @@
+/* Clase modelo de Brand */
 export class Brand {
   id: string;
   name: string;
