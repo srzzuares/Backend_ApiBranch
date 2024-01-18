@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { v4 as uuid } from 'uuid';
 import { Brand } from '../../libs/entitys';
-import { CreateBrandDto } from '../../libs/dtos/brands/create-brand.dto';
+import { CreateBrandDto, UpdateBrandDto } from '../../libs/dtos';
 
 const now: Date = new Date();
 /* Servicio de lógica de negocios */
@@ -46,5 +46,14 @@ export class BrandService {
     return findBrand;
   }
   /* Actualiza un atributo de brand */
+  patchOneByIdBrand(idBrand: string, payload: UpdateBrandDto) {
+    const findBrand: Brand = this.brands.find(
+      (brand: Brand) => brand.id === idBrand,
+    );
+    if (!findBrand) return { message: `El id: ${idBrand} es incorrecto` };
+    findBrand.name = payload.name;
+    findBrand.updatedAt = now;
+    return findBrand;
+  }
   /* Elimina un atributo de brand */
 }
