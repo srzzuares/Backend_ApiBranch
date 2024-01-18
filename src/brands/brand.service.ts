@@ -32,4 +32,12 @@ export class BrandService {
     this.brands.push(newBrand);
     return newBrand;
   }
+
+  getOneByIdBrand(idBrand: string) {
+    const findBrand: Brand = this.brands.find(
+      (brand: Brand) => brand.id === idBrand,
+    );
+    if (!findBrand) return { message: `El id: ${idBrand} es incorrecto` };
+    return findBrand;
+  }
 }
