@@ -1,6 +1,6 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Param, Patch, Post } from '@nestjs/common';
 import { BrandService } from './brand.service';
-import { CreateBrandDto } from '../../libs/dtos/brands/create-brand.dto';
+import { CreateBrandDto, UpdateBrandDto } from '../../libs/dtos';
 import { Brand } from '../../libs/entitys';
 /* Clase controlador para peticiones Http */
 @Controller('brand')
@@ -22,5 +22,9 @@ export class BrandController {
     return this.brandService.getOneByIdBrand(id);
   }
   /*Metodo Http Put o Patch por Id */
+  @Patch(':id')
+  patchOneByIdBrand(@Param('id') id: string, @Body() payload: UpdateBrandDto) {
+    return this.brandService.patchOneByIdBrand(id, payload);
+  }
   /*Metodo Http Delete por Id */
 }
